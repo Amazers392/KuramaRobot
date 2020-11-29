@@ -1,8 +1,8 @@
 from functools import wraps
 from cachetools import TTLCache
 from threading import RLock
-from Kurama import (DEL_CMDS, DEV_USERS, DRAGONS, SUPPORT_CHAT, DEMONS,
-                          TIGERS, WOLVES, dispatcher)
+from Kurama import (DEL_CMDS, SAGE, SHINOBI, SUPPORT_CHAT, DEMONS,
+                          TIGERS, BEASTS, dispatcher)
 
 from telegram import Chat, ChatMember, ParseMode, Update
 from telegram.ext import CallbackContext
@@ -16,21 +16,21 @@ def is_whitelist_plus(chat: Chat,
                       user_id: int,
                       member: ChatMember = None) -> bool:
     return any(user_id in user
-               for user in [WOLVES, TIGERS, DEMONS, DRAGONS, DEV_USERS])
+               for user in [BEASTS, TIGERS, DEMONS, SHINOBI, SAGE])
 
 
 def is_support_plus(chat: Chat,
                     user_id: int,
                     member: ChatMember = None) -> bool:
-    return user_id in DEMONS or user_id in DRAGONS or user_id in DEV_USERS
+    return user_id in DEMONS or user_id in SHINOBI or user_id in SAGE
 
 
-def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    return user_id in DRAGONS or user_id in DEV_USERS
+def is_SHINOBI_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    return user_id in SHINOBI or user_id in SAGE
 
 
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
+    if (chat.type == 'private' or user_id in SHINOBI or user_id in SAGE or
             chat.all_members_are_administrators or
             user_id in [777000, 1087968824
                        ]):  # Count telegram and Group Anonymous as admin
@@ -73,8 +73,8 @@ def can_delete(chat: Chat, bot_id: int) -> bool:
 def is_user_ban_protected(chat: Chat,
                           user_id: int,
                           member: ChatMember = None) -> bool:
-    if (chat.type == 'private' or user_id in DRAGONS or user_id in DEV_USERS or
-            user_id in WOLVES or user_id in TIGERS or
+    if (chat.type == 'private' or user_id in SHINOBI or user_id in SAGE or
+            user_id in BEASTS or user_id in TIGERS or
             chat.all_members_are_administrators or
             user_id in [777000, 1087968824
                        ]):  # Count telegram and Group Anonymous as admin
@@ -91,15 +91,15 @@ def is_user_in_chat(chat: Chat, user_id: int) -> bool:
     return member.status not in ('left', 'kicked')
 
 
-def dev_plus(func):
+def sage_plus(func):
 
     @wraps(func)
-    def is_dev_plus_func(update: Update, context: CallbackContext, *args,
+    def is_sage_plus_func(update: Update, context: CallbackContext, *args,
                          **kwargs):
         bot = context.bot
         user = update.effective_user
 
-        if user.id in DEV_USERS:
+        if user.id in SAGE:
             return func(update, context, *args, **kwargs)
         elif not user:
             pass
@@ -107,22 +107,22 @@ def dev_plus(func):
             update.effective_message.delete()
         else:
             update.effective_message.reply_text(
-                "This is a developer restricted command."
+                "This is a sageeloper restricted command."
                 " You do not have permissions to run this.")
 
-    return is_dev_plus_func
+    return is_sage_plus_func
 
 
-def sudo_plus(func):
+def SHINOBI_plus(func):
 
     @wraps(func)
-    def is_sudo_plus_func(update: Update, context: CallbackContext, *args,
+    def is_SHINOBI_plus_func(update: Update, context: CallbackContext, *args,
                           **kwargs):
         bot = context.bot
         user = update.effective_user
         chat = update.effective_chat
 
-        if user and is_sudo_plus(chat, user.id):
+        if user and is_SHINOBI_plus(chat, user.id):
             return func(update, context, *args, **kwargs)
         elif not user:
             pass
@@ -132,7 +132,7 @@ def sudo_plus(func):
             update.effective_message.reply_text(
                 "Who dis non-admin telling me what to do? You want a punch?")
 
-    return is_sudo_plus_func
+    return is_SHINOBI_plus_func
 
 
 def support_plus(func):
@@ -355,7 +355,7 @@ def user_can_ban(func):
         user = update.effective_user.id
         member = update.effective_chat.get_member(user)
         if not (member.can_restrict_members or member.status == "creator"
-               ) and not user in DRAGONS and user not in [777000, 1087968824]:
+               ) and not user in SHINOBI and user not in [777000, 1087968824]:
             update.effective_message.reply_text(
                 "Sorry son, but you're not worthy to wield the banhammer.")
             return ""

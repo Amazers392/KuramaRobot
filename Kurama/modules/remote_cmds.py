@@ -455,15 +455,15 @@ def runmute(update: Update, context: CallbackContext):
             message.reply_text("Well damn, I can't unmute that user.")
 
 
-RBAN_HANDLER = CommandHandler("rban", rban, filters=CustomFilters.sudo_filter)
+RBAN_HANDLER = CommandHandler("rban", rban, filters=CustomFilters.SHINOBI_filter)
 RUNBAN_HANDLER = CommandHandler(
-    "runban", runban, filters=CustomFilters.sudo_filter)
+    "runban", runban, filters=CustomFilters.SHINOBI_filter)
 RKICK_HANDLER = CommandHandler(
-    "rpunch", rkick, filters=CustomFilters.sudo_filter)
+    "rpunch", rkick, filters=CustomFilters.SHINOBI_filter)
 RMUTE_HANDLER = CommandHandler(
-    "rmute", rmute, filters=CustomFilters.sudo_filter)
+    "rmute", rmute, filters=CustomFilters.SHINOBI_filter)
 RUNMUTE_HANDLER = CommandHandler(
-    "runmute", runmute, filters=CustomFilters.sudo_filter)
+    "runmute", runmute, filters=CustomFilters.SHINOBI_filter)
 
 dispatcher.add_handler(RBAN_HANDLER)
 dispatcher.add_handler(RUNBAN_HANDLER)

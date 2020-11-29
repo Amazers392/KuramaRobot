@@ -14,7 +14,7 @@ from telegram.ext.dispatcher import run_async
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
 
-from Kurama import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
+from Kurama import (SAGE, OWNER_ID, SHINOBI, DEMONS, TIGERS, BEASTS,
                           INFOPIC, dispatcher, sw)
 from Kurama.__main__ import STATS, TOKEN, USER_INFO
 import Kurama.modules.sql.userinfo_sql as sql
@@ -22,9 +22,9 @@ from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.sql.global_bans_sql import is_user_gbanned
 from Kurama.modules.sql.afk_sql import is_afk, check_afk_status
 from Kurama.modules.sql.users_sql import get_user_num_chats
-from Kurama.modules.helper_funcs.chat_status import sudo_plus
+from Kurama.modules.helper_funcs.chat_status import SHINOBI_plus
 from Kurama.modules.helper_funcs.extraction import extract_user
-from Kurama import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
+from Kurama import telethn as SaitamaTelethonClient, TIGERS, SHINOBI, DEMONS
 
 
 def no_by_per(totalhp, percentage):
@@ -154,7 +154,7 @@ def get_id(update: Update, context: CallbackContext):
 @SaitamaTelethonClient.on(
     events.NewMessage(
         pattern='/ginfo ',
-        from_users=(TIGERS or []) + (DRAGONS or []) + (DEMONS or [])))
+        from_users=(TIGERS or []) + (SHINOBI or []) + (DEMONS or [])))
 async def group_info(event) -> None:
     chat = event.text.split(' ', 1)[1]
     try:
@@ -273,10 +273,10 @@ def info(update: Update, context: CallbackContext):
     if user.id == OWNER_ID:
         text += "\n\nThe Disaster level of this person is 'God'."
         disaster_level_present = True
-    elif user.id in DEV_USERS:
+    elif user.id in SAGE:
         text += "\n\nThis user is member of 'Hero Association'."
         disaster_level_present = True
-    elif user.id in DRAGONS:
+    elif user.id in SHINOBI:
         text += "\n\nThe Disaster level of this person is 'Dragon'."
         disaster_level_present = True
     elif user.id in DEMONS:
@@ -285,7 +285,7 @@ def info(update: Update, context: CallbackContext):
     elif user.id in TIGERS:
         text += "\n\nThe Disaster level of this person is 'Tiger'."
         disaster_level_present = True
-    elif user.id in WOLVES:
+    elif user.id in BEASTS:
         text += "\n\nThe Disaster level of this person is 'Wolf'."
         disaster_level_present = True
 
@@ -378,7 +378,7 @@ def set_about_me(update: Update, context: CallbackContext):
         repl_message = message.reply_to_message
         repl_user_id = repl_message.from_user.id
         if repl_user_id in [bot.id, 777000, 1087968824] and (user_id
-                                                             in DEV_USERS):
+                                                             in SAGE):
             user_id = repl_user_id
     text = message.text
     info = text.split(None, 1)
@@ -399,7 +399,7 @@ def set_about_me(update: Update, context: CallbackContext):
 
 
 @run_async
-@sudo_plus
+@SHINOBI_plus
 def stats(update: Update, context: CallbackContext):
     process = subprocess.Popen(
         "neofetch --stdout", shell=True, text=True, stdout=subprocess.PIPE)
@@ -454,11 +454,11 @@ def set_about_bio(update: Update, context: CallbackContext):
             )
             return
 
-        if user_id in [777000, 1087968824] and sender_id not in DEV_USERS:
+        if user_id in [777000, 1087968824] and sender_id not in SAGE:
             message.reply_text("You are not authorised")
             return
 
-        if user_id == bot.id and sender_id not in DEV_USERS:
+        if user_id == bot.id and sender_id not in SAGE:
             message.reply_text(
                 "Erm... yeah, I only trust Heroes Association to set my bio.")
             return

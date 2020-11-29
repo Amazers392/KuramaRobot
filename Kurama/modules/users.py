@@ -2,8 +2,8 @@ from io import BytesIO
 from time import sleep
 
 import Kurama.modules.sql.users_sql as sql
-from Kurama import DEV_USERS, LOGGER, OWNER_ID, dispatcher
-from Kurama.modules.helper_funcs.chat_status import dev_plus, sudo_plus
+from Kurama import SAGE, LOGGER, OWNER_ID, dispatcher
+from Kurama.modules.helper_funcs.chat_status import sage_plus, SHINOBI_plus
 from Kurama.modules.sql.users_sql import get_all_users
 from telegram import TelegramError, Update
 from telegram.error import BadRequest
@@ -12,7 +12,7 @@ from telegram.ext import (CallbackContext, CommandHandler, Filters,
 
 USERS_GROUP = 4
 CHAT_GROUP = 5
-DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
+sage_AND_MORE = SAGE.append(int(OWNER_ID))
 
 
 def get_user_id(username):
@@ -48,7 +48,7 @@ def get_user_id(username):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def broadcast(update: Update, context: CallbackContext):
     to_send = update.effective_message.text.split(None, 1)
 
@@ -110,7 +110,7 @@ def log_user(update: Update, context: CallbackContext):
 
 
 @run_async
-@sudo_plus
+@SHINOBI_plus
 def chats(update: Update, context: CallbackContext):
     all_chats = sql.get_all_chats() or []
     chatfile = 'List of chats.\n0. Chat name | Chat ID | Members count\n'

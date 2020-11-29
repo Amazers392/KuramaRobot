@@ -4,7 +4,7 @@ import os
 
 
 def get_user_list(config, key):
-    with open('{}/SaitamaRobot/{}'.format(os.getcwd(), config),
+    with open('{}/Kurama/{}'.format(os.getcwd(), config),
               'r') as json_file:
         return json.load(json_file)[key]
 
@@ -22,7 +22,7 @@ class Config(object):
     OWNER_USERNAME = "Sawada"
     SUPPORT_CHAT = 'OnePunchSupport'  #Your own group for support, do not add the @
     JOIN_LOGGER = -1001253661229  #Prints any new group the bot is added to, prints just the name and ID.
-    EVENT_LOGS = -1001190806654  #Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
+    EVENT_LOGS = -1001190806654  #Prints information like gbans, SHINOBI promotes, AI enabled disable states that may help in debugging and shit
 
     #RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'something://somewhat:user@hosturl:port/databasename'  # needed for any database modules
@@ -35,15 +35,15 @@ class Config(object):
     SPAMWATCH_SUPPORT_CHAT = "@SpamWatchSupport"
 
     #OPTIONAL
-    ##List of id's -  (not usernames) for users which have sudo access to the bot.
-    DRAGONS = get_user_list('elevated_users.json', 'sudos')
-    ##List of id's - (not usernames) for developers who will have the same perms as the owner
-    DEV_USERS = get_user_list('elevated_users.json', 'devs')
+    ##List of id's -  (not usernames) for users which have SHINOBI access to the bot.
+    SHINOBI = get_user_list('elevated_users.json', 'SHINOBIs')
+    ##List of id's - (not usernames) for sageelopers who will have the same perms as the owner
+    SAGE = get_user_list('elevated_users.json', 'sages')
     ##List of id's (not usernames) for users which are allowed to gban, but can also be banned.
     DEMONS = get_user_list('elevated_users.json', 'supports')
     #List of id's (not usernames) for users which WONT be banned/kicked by the bot.
     TIGERS = get_user_list('elevated_users.json', 'tigers')
-    WOLVES = get_user_list('elevated_users.json', 'whitelists')
+    BEASTS = get_user_list('elevated_users.json', 'whitelists')
     DONATION_LINK = None  # EG, paypal
     CERT_PATH = None
     PORT = 5000
@@ -64,5 +64,5 @@ class Production(Config):
     LOGGER = True
 
 
-class Development(Config):
+class sageelopment(Config):
     LOGGER = True

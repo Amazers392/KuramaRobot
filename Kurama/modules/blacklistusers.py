@@ -1,9 +1,9 @@
 # Module to blacklist users and prevent them from using commands by @TheRealPhoenix
 import html
 import Kurama.modules.sql.blacklistusers_sql as sql
-from Kurama import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
+from Kurama import (SAGE, OWNER_ID, SHINOBI, DEMONS, TIGERS, BEASTS,
                           dispatcher)
-from Kurama.modules.helper_funcs.chat_status import dev_plus
+from Kurama.modules.helper_funcs.chat_status import sage_plus
 from Kurama.modules.helper_funcs.extraction import (extract_user,
                                                           extract_user_and_text)
 from Kurama.modules.log_channel import gloggable
@@ -12,12 +12,12 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, run_async
 from telegram.utils.helpers import mention_html
 
-BLACKLISTWHITELIST = [OWNER_ID] + DEV_USERS + DRAGONS + WOLVES + DEMONS
-BLABLEUSERS = [OWNER_ID] + DEV_USERS
+BLACKLISTWHITELIST = [OWNER_ID] + SAGE + SHINOBI + BEASTS + DEMONS
+BLABLEUSERS = [OWNER_ID] + SAGE
 
 
 @run_async
-@dev_plus
+@sage_plus
 @gloggable
 def bl_user(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
@@ -61,7 +61,7 @@ def bl_user(update: Update, context: CallbackContext) -> str:
 
 
 @run_async
-@dev_plus
+@sage_plus
 @gloggable
 def unbl_user(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
@@ -104,7 +104,7 @@ def unbl_user(update: Update, context: CallbackContext) -> str:
 
 
 @run_async
-@dev_plus
+@sage_plus
 def bl_users(update: Update, context: CallbackContext):
     users = []
     bot = context.bot
@@ -137,7 +137,7 @@ def __user_info__(user_id):
         return ""
     if user_id == dispatcher.bot.id:
         return ""
-    if int(user_id) in DRAGONS + TIGERS + WOLVES:
+    if int(user_id) in SHINOBI + TIGERS + BEASTS:
         return ""
     if is_blacklisted:
         text = text.format("Yes")

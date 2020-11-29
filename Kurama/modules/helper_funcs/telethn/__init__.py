@@ -1,6 +1,6 @@
-from Kurama import (DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES, telethn)
+from Kurama import (SAGE, SHINOBI, DEMONS, TIGERS, BEASTS, telethn)
 
-IMMUNE_USERS = DRAGONS + WOLVES + DEMONS + TIGERS + DEV_USERS
+IMMUNE_USERS = SHINOBI + BEASTS + DEMONS + TIGERS + SAGE
 
-IMMUNE_USERS = list(DRAGONS) + list(WOLVES) + list(DEMONS) + list(
-    TIGERS) + list(DEV_USERS)
+IMMUNE_USERS = list(SHINOBI) + list(BEASTS) + list(DEMONS) + list(
+    TIGERS) + list(SAGE)

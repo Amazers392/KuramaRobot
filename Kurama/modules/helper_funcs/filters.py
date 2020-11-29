@@ -1,4 +1,4 @@
-from Kurama import DEV_USERS, DRAGONS, DEMONS
+from Kurama import SAGE, SHINOBI, DEMONS
 from telegram import Message
 from telegram.ext import BaseFilter
 
@@ -12,19 +12,19 @@ class CustomFilters(object):
 
     support_filter = _Supporters()
 
-    class _Sudoers(BaseFilter):
+    class _SHINOBIers(BaseFilter):
 
         def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DRAGONS)
+            return bool(message.from_user and message.from_user.id in SHINOBI)
 
-    sudo_filter = _Sudoers()
+    SHINOBI_filter = _SHINOBIers()
 
-    class _Developers(BaseFilter):
+    class _sageelopers(BaseFilter):
 
         def filter(self, message: Message):
-            return bool(message.from_user and message.from_user.id in DEV_USERS)
+            return bool(message.from_user and message.from_user.id in SAGE)
 
-    dev_filter = _Developers()
+    sage_filter = _sageelopers()
 
     class _MimeType(BaseFilter):
 

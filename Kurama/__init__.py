@@ -39,11 +39,11 @@ if ENV:
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
 
     try:
-        DRAGONS = set(int(x) for x in os.environ.get("DRAGONS", "").split())
-        DEV_USERS = set(int(x) for x in os.environ.get("DEV_USERS", "").split())
+        SHINOBI = set(int(x) for x in os.environ.get("SHINOBI", "").split())
+        SAGE = set(int(x) for x in os.environ.get("SAGE", "").split())
     except ValueError:
         raise Exception(
-            "Your sudo or dev users list does not contain valid integers.")
+            "Your SHINOBI or SAGE users list does not contain valid integers.")
 
     try:
         DEMONS = set(int(x) for x in os.environ.get("DEMONS", "").split())
@@ -52,10 +52,10 @@ if ENV:
             "Your support users list does not contain valid integers.")
 
     try:
-        WOLVES = set(int(x) for x in os.environ.get("WOLVES", "").split())
+        BEASTS = set(int(x) for x in os.environ.get("BEASTS", "").split())
     except ValueError:
         raise Exception(
-            "Your whitelisted users list does not contain valid integers.")
+            "Your beasts users list does not contain valid integers.")
 
     try:
         TIGERS = set(int(x) for x in os.environ.get("TIGERS", "").split())
@@ -96,7 +96,7 @@ if ENV:
             "Your blacklisted chats list does not contain valid integers.")
 
 else:
-    from SaitamaRobot.config import Development as Config
+    from Kurama.config import sageelopment as Config
     TOKEN = Config.TOKEN
 
     try:
@@ -108,23 +108,23 @@ else:
     OWNER_USERNAME = Config.OWNER_USERNAME
 
     try:
-        DRAGONS = set(int(x) for x in Config.DRAGONS or [])
-        DEV_USERS = set(int(x) for x in Config.DEV_USERS or [])
+        SHINOBI = set(int(x) for x in Config.SHINOBI or [])
+        SAGE = set(int(x) for x in Config.SAGE or [])
     except ValueError:
         raise Exception(
-            "Your sudo or dev users list does not contain valid integers.")
+            "Your SHINOBI or sage users list does not contain valid integers.")
 
     try:
         DEMONS = set(int(x) for x in Config.DEMONS or [])
     except ValueError:
         raise Exception(
-            "Your support users list does not contain valid integers.")
+            "Your demon users list does not contain valid integers.")
 
     try:
-        WOLVES = set(int(x) for x in Config.WOLVES or [])
+        BEASTS = set(int(x) for x in Config.BEASTS or [])
     except ValueError:
         raise Exception(
-            "Your whitelisted users list does not contain valid integers.")
+            "Your beasts users list does not contain valid integers.")
 
     try:
         TIGERS = set(int(x) for x in Config.TIGERS or [])
@@ -164,8 +164,8 @@ else:
         raise Exception(
             "Your blacklisted chats list does not contain valid integers.")
 
-DRAGONS.add(OWNER_ID)
-DEV_USERS.add(OWNER_ID)
+SHINOBI.add(OWNER_ID)
+SAGE.add(OWNER_ID)
 
 if not SPAMWATCH_API:
     sw = None
@@ -177,14 +177,14 @@ updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
 dispatcher = updater.dispatcher
 
-DRAGONS = list(DRAGONS) + list(DEV_USERS)
-DEV_USERS = list(DEV_USERS)
-WOLVES = list(WOLVES)
+SHINOBI = list(SHINOBI) + list(SAGE)
+SAGE = list(SAGE)
+BEASTS = list(BEASTS)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
 
 # Load at end to ensure all prev variables have been set
-from SaitamaRobot.modules.helper_funcs.handlers import (CustomCommandHandler,
+from Kurama.modules.helper_funcs.handlers import (CustomCommandHandler,
                                                         CustomMessageHandler,
                                                         CustomRegexHandler)
 

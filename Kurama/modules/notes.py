@@ -4,7 +4,7 @@ import random
 from typing import Optional
 
 import Kurama.modules.sql.notes_sql as sql
-from Kurama import LOGGER, JOIN_LOGGER, SUPPORT_CHAT, dispatcher, DRAGONS
+from Kurama import LOGGER, JOIN_LOGGER, SUPPORT_CHAT, dispatcher, SHINOBI
 from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.helper_funcs.handlers import MessageHandlerChecker
 from Kurama.modules.helper_funcs.chat_status import user_admin, connection_status
@@ -277,7 +277,7 @@ def clearall(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
     member = chat.get_member(user.id)
-    if member.status != "creator" and user.id not in DRAGONS:
+    if member.status != "creator" and user.id not in SHINOBI:
         update.effective_message.reply_text(
             "Only the chat owner can clear all notes at once.")
     else:
@@ -298,7 +298,7 @@ def clearall_btn(update: Update, context: CallbackContext):
     message = update.effective_message
     member = chat.get_member(query.from_user.id)
     if query.data == 'notes_rmall':
-        if member.status == "creator" or query.from_user.id in DRAGONS:
+        if member.status == "creator" or query.from_user.id in SHINOBI:
             note_list = sql.get_all_chat_notes(chat.id)
             try:
                 for notename in note_list:
@@ -314,7 +314,7 @@ def clearall_btn(update: Update, context: CallbackContext):
         if member.status == "member":
             query.answer("You need to be admin to do this.")
     elif query.data == 'notes_cancel':
-        if member.status == "creator" or query.from_user.id in DRAGONS:
+        if member.status == "creator" or query.from_user.id in SHINOBI:
             message.edit_text("Clearing of all notes has been cancelled.")
             return
         if member.status == "administrator":

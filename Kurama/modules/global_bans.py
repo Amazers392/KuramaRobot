@@ -4,9 +4,9 @@ from datetime import datetime
 from io import BytesIO
 from Kurama.modules.sql.users_sql import get_user_com_chats
 import Kurama.modules.sql.global_bans_sql as sql
-from Kurama import (DEV_USERS, EVENT_LOGS, OWNER_ID, STRICT_GBAN, DRAGONS,
+from Kurama import (SAGE, EVENT_LOGS, OWNER_ID, STRICT_GBAN, SHINOBI,
                           SUPPORT_CHAT, SPAMWATCH_SUPPORT_CHAT, DEMONS, TIGERS,
-                          WOLVES, sw, dispatcher)
+                          BEASTS, sw, dispatcher)
 from Kurama.modules.helper_funcs.chat_status import (is_user_admin,
                                                            support_plus,
                                                            user_admin)
@@ -67,13 +67,13 @@ def gban(update: Update, context: CallbackContext):
         )
         return
 
-    if int(user_id) in DEV_USERS:
+    if int(user_id) in SAGE:
         message.reply_text(
             "That user is part of the Association\nI can't act against our own."
         )
         return
 
-    if int(user_id) in DRAGONS:
+    if int(user_id) in SHINOBI:
         message.reply_text(
             "I spy, with my little eye... a disaster! Why are you guys turning on each other?"
         )
@@ -88,7 +88,7 @@ def gban(update: Update, context: CallbackContext):
         message.reply_text("That's a Tiger! They cannot be banned!")
         return
 
-    if int(user_id) in WOLVES:
+    if int(user_id) in BEASTS:
         message.reply_text("That's a Wolf! They cannot be banned!")
         return
 
@@ -174,7 +174,7 @@ def gban(update: Update, context: CallbackContext):
                 "\n\nFormatting has been disabled due to an unexpected error.")
 
     else:
-        send_to_list(bot, DRAGONS + DEMONS, log_message, html=True)
+        send_to_list(bot, SHINOBI + DEMONS, log_message, html=True)
 
     sql.gban_user(user_id, user_chat.username or user_chat.first_name, reason)
 
@@ -203,7 +203,7 @@ def gban(update: Update, context: CallbackContext):
                         f"Could not gban due to {excp.message}",
                         parse_mode=ParseMode.HTML)
                 else:
-                    send_to_list(bot, DRAGONS + DEMONS,
+                    send_to_list(bot, SHINOBI + DEMONS,
                                  f"Could not gban due to: {excp.message}")
                 sql.ungban_user(user_id)
                 return
@@ -218,7 +218,7 @@ def gban(update: Update, context: CallbackContext):
     else:
         send_to_list(
             bot,
-            DRAGONS + DEMONS,
+            SHINOBI + DEMONS,
             f"Gban complete! (User banned in <code>{gbanned_chats}</code> chats)",
             html=True)
 
@@ -297,7 +297,7 @@ def ungban(update: Update, context: CallbackContext):
                 EVENT_LOGS, log_message +
                 "\n\nFormatting has been disabled due to an unexpected error.")
     else:
-        send_to_list(bot, DRAGONS + DEMONS, log_message, html=True)
+        send_to_list(bot, SHINOBI + DEMONS, log_message, html=True)
 
     chats = get_user_com_chats(user_id)
     ungbanned_chats = 0
@@ -339,7 +339,7 @@ def ungban(update: Update, context: CallbackContext):
             log_message + f"\n<b>Chats affected:</b> {ungbanned_chats}",
             parse_mode=ParseMode.HTML)
     else:
-        send_to_list(bot, DRAGONS + DEMONS, "un-gban complete!")
+        send_to_list(bot, SHINOBI + DEMONS, "un-gban complete!")
 
     end_time = time.time()
     ungban_time = round((end_time - start_time), 2)
@@ -470,7 +470,7 @@ def __user_info__(user_id):
         return ""
     if user_id == dispatcher.bot.id:
         return ""
-    if int(user_id) in DRAGONS + TIGERS + WOLVES:
+    if int(user_id) in SHINOBI + TIGERS + BEASTS:
         return ""
     if is_gbanned:
         text = text.format("Yes")
@@ -495,7 +495,7 @@ __help__ = f"""
 *Admins only:*
  • `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
 
-Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect \
+Anti-Spam, used by bot sages to ban spammers across all groups. This helps protect \
 you and your groups by removing spam flooders as quickly as possible.
 *Note:* Users can appeal gbans or report spammers at @{SUPPORT_CHAT}
 

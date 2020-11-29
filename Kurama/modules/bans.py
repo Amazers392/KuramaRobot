@@ -5,8 +5,8 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
 
-from Kurama import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
-                          WOLVES, dispatcher)
+from Kurama import (SAGE, LOGGER, OWNER_ID, SHINOBI, DEMONS, TIGERS,
+                          BEASTS, dispatcher)
 from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.helper_funcs.chat_status import (
     bot_admin, can_restrict, connection_status, is_user_admin,
@@ -49,15 +49,15 @@ def ban(update: Update, context: CallbackContext) -> str:
         message.reply_text("Oh yeah, ban myself, noob!")
         return log_message
 
-    if is_user_ban_protected(chat, user_id, member) and user not in DEV_USERS:
+    if is_user_ban_protected(chat, user_id, member) and user not in SAGE:
         if user_id == OWNER_ID:
             message.reply_text(
                 "Trying to put me against a God level disaster huh?")
             return log_message
-        elif user_id in DEV_USERS:
+        elif user_id in SAGE:
             message.reply_text("I can't act against our own.")
             return log_message
-        elif user_id in DRAGONS:
+        elif user_id in SHINOBI:
             message.reply_text(
                 "Fighting this Dragon here will put civilian lives at risk.")
             return log_message
@@ -71,7 +71,7 @@ def ban(update: Update, context: CallbackContext) -> str:
                 "Bring an order from Heroes association to fight a Tiger disaster."
             )
             return log_message
-        elif user_id in WOLVES:
+        elif user_id in BEASTS:
             message.reply_text("Wolf abilities make them ban immune!")
             return log_message
         else:
@@ -338,7 +338,7 @@ def selfunban(context: CallbackContext, update: Update) -> str:
     message = update.effective_message
     user = update.effective_user
     bot, args = context.bot, context.args
-    if user.id not in DRAGONS or user.id not in TIGERS:
+    if user.id not in SHINOBI or user.id not in TIGERS:
         return
 
     try:

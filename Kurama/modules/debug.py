@@ -6,13 +6,13 @@ from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
 from Kurama import telethn, dispatcher
-from Kurama.modules.helper_funcs.chat_status import dev_plus
+from Kurama.modules.helper_funcs.chat_status import sage_plus
 
 DEBUG_MODE = False
 
 
 @run_async
-@dev_plus
+@sage_plus
 def debug(update: Update, context: CallbackContext):
     global DEBUG_MODE
     args = update.effective_message.text.split(None, 1)
@@ -54,7 +54,7 @@ support_chat = os.getenv('SUPPORT_CHAT')
 
 
 @run_async
-@dev_plus
+@sage_plus
 def logs(update: Update, context: CallbackContext):
     chat_username = update.effective_chat.username
     if not chat_username:

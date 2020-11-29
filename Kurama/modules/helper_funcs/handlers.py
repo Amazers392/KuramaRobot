@@ -1,6 +1,6 @@
 import Kurama.modules.sql.blacklistusers_sql as sql
 from Kurama import ALLOW_EXCL
-from Kurama import (DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES)
+from Kurama import (SAGE, SHINOBI, DEMONS, TIGERS, BEASTS)
 
 from telegram import Update
 from telegram.ext import CommandHandler, MessageHandler, RegexHandler, Filters
@@ -16,8 +16,8 @@ else:
 class AntiSpam:
 
     def __init__(self):
-        self.whitelist = (DEV_USERS or []) + (DRAGONS or []) + (
-            WOLVES or []) + (DEMONS or []) + (
+        self.whitelist = (SAGE or []) + (SHINOBI or []) + (
+            BEASTS or []) + (DEMONS or []) + (
                 TIGERS or [])
         #Values are HIGHLY experimental, its recommended you pay attention to our commits as we will be adjusting the values over time with what suits best.
         Duration.CUSTOM = 15  # Custom duration, 15 seconds

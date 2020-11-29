@@ -6,7 +6,7 @@ from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, run_async
 
 from Kurama import StartTime, dispatcher
-from Kurama.modules.helper_funcs.chat_status import sudo_plus
+from Kurama.modules.helper_funcs.chat_status import SHINOBI_plus
 from Kurama.modules.disable import DisableAbleCommandHandler
 
 sites_list = {
@@ -69,7 +69,7 @@ def ping_func(to_ping: List[str]) -> List[str]:
 
 
 @run_async
-@sudo_plus
+@SHINOBI_plus
 def ping(update: Update, context: CallbackContext):
     msg = update.effective_message
 
@@ -87,7 +87,7 @@ def ping(update: Update, context: CallbackContext):
 
 
 @run_async
-@sudo_plus
+@SHINOBI_plus
 def pingall(update: Update, context: CallbackContext):
     to_ping = ["Kaizoku", "Kayo", "Telegram", "Jikan"]
     pinged_list = ping_func(to_ping)

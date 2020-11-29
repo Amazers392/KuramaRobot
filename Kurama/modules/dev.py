@@ -4,13 +4,13 @@ import sys
 from time import sleep
 
 from Kurama import dispatcher
-from Kurama.modules.helper_funcs.chat_status import dev_plus
+from Kurama.modules.helper_funcs.chat_status import sage_plus
 from telegram import TelegramError, Update
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
 
 @run_async
-@dev_plus
+@sage_plus
 def leave(update: Update, context: CallbackContext):
     bot = context.bot
     args = context.args
@@ -27,7 +27,7 @@ def leave(update: Update, context: CallbackContext):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def gitpull(update: Update, context: CallbackContext):
     sent_msg = update.effective_message.reply_text(
         "Pulling all changes from remote and then attempting to restart.")
@@ -46,7 +46,7 @@ def gitpull(update: Update, context: CallbackContext):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def restart(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
         "Starting a new instance and shutting down this one")
@@ -63,5 +63,5 @@ dispatcher.add_handler(LEAVE_HANDLER)
 dispatcher.add_handler(GITPULL_HANDLER)
 dispatcher.add_handler(RESTART_HANDLER)
 
-__mod_name__ = "Dev"
+__mod_name__ = "sage"
 __handlers__ = [LEAVE_HANDLER, GITPULL_HANDLER, RESTART_HANDLER]

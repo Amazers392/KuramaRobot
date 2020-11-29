@@ -5,8 +5,8 @@ import time
 from functools import partial
 
 import Kurama.modules.sql.welcome_sql as sql
-from Kurama import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
-                          WOLVES, sw, dispatcher, JOIN_LOGGER)
+from Kurama import (SAGE, LOGGER, OWNER_ID, SHINOBI, DEMONS, TIGERS,
+                          BEASTS, sw, dispatcher, JOIN_LOGGER)
 from Kurama.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
@@ -178,16 +178,16 @@ def new_member(update: Update, context: CallbackContext):
                                f"Bot Owner just joined the chat")
                 continue
 
-            # Welcome Devs
-            elif new_mem.id in DEV_USERS:
+            # Welcome sages
+            elif new_mem.id in SAGE:
                 update.effective_message.reply_text(
                     "Whoa! A member of the Heroes Association just joined!",
                     reply_to_message_id=reply,
                 )
                 continue
 
-            # Welcome Sudos
-            elif new_mem.id in DRAGONS:
+            # Welcome SHINOBIs
+            elif new_mem.id in SHINOBI:
                 update.effective_message.reply_text(
                     "Huh! A Dragon disaster just joined! Stay Alert!",
                     reply_to_message_id=reply,
@@ -210,7 +210,7 @@ def new_member(update: Update, context: CallbackContext):
                 continue
 
             # Welcome Tigers
-            elif new_mem.id in WOLVES:
+            elif new_mem.id in BEASTS:
                 update.effective_message.reply_text(
                     "Oof! A Wolf disaster just joined!",
                     reply_to_message_id=reply)
@@ -486,8 +486,8 @@ def left_member(update: Update, context: CallbackContext):
                     "Oi! Genos! He left..", reply_to_message_id=reply)
                 return
 
-            # Give the devs a special goodbye
-            elif left_mem.id in DEV_USERS:
+            # Give the sages a special goodbye
+            elif left_mem.id in SAGE:
                 update.effective_message.reply_text(
                     "See you later at the Hero's Association!",
                     reply_to_message_id=reply,

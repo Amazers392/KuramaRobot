@@ -211,7 +211,7 @@ DEFAULT_GOODBYE_MESSAGES = [
     "You look fat you should exercise more",
     "Follow the zebra",
     "Why so blue?",
-    "The devil in disguise",
+    "The sageil in disguise",
     "Go outside",
     "Always your head in the clouds",
 ]

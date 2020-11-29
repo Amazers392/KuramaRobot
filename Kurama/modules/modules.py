@@ -4,13 +4,13 @@ from Kurama import dispatcher
 from Kurama.__main__ import (CHAT_SETTINGS, DATA_EXPORT, DATA_IMPORT,
                                    HELPABLE, IMPORTED, MIGRATEABLE, STATS,
                                    USER_INFO, USER_SETTINGS)
-from Kurama.modules.helper_funcs.chat_status import dev_plus, sudo_plus
+from Kurama.modules.helper_funcs.chat_status import sage_plus, SHINOBI_plus
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
 
 @run_async
-@dev_plus
+@sage_plus
 def load(update: Update, context: CallbackContext):
     message = update.effective_message
     text = message.text.split(" ", 1)[1]
@@ -76,7 +76,7 @@ def load(update: Update, context: CallbackContext):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def unload(update: Update, context: CallbackContext):
     message = update.effective_message
     text = message.text.split(" ", 1)[1]
@@ -144,7 +144,7 @@ def unload(update: Update, context: CallbackContext):
 
 
 @run_async
-@sudo_plus
+@SHINOBI_plus
 def listmodules(update: Update, context: CallbackContext):
     message = update.effective_message
     module_list = []

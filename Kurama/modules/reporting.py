@@ -1,6 +1,6 @@
 import html
 
-from Kurama import (LOGGER, DRAGONS, TIGERS, WOLVES, dispatcher)
+from Kurama import (LOGGER, SHINOBI, TIGERS, BEASTS, dispatcher)
 from Kurama.modules.helper_funcs.chat_status import (user_admin,
                                                            user_not_admin)
 from Kurama.modules.log_channel import loggable
@@ -13,7 +13,7 @@ from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
 from telegram.utils.helpers import mention_html
 
 REPORT_GROUP = 12
-REPORT_IMMUNE_USERS = DRAGONS + TIGERS + WOLVES
+REPORT_IMMUNE_USERS = SHINOBI + TIGERS + BEASTS
 
 
 @run_async

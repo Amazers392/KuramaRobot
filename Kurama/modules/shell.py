@@ -1,13 +1,13 @@
 import subprocess
 
 from Kurama import LOGGER, dispatcher
-from Kurama.modules.helper_funcs.chat_status import dev_plus
+from Kurama.modules.helper_funcs.chat_status import sage_plus
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.ext.dispatcher import run_async
 
 
-@dev_plus
+@sage_plus
 @run_async
 def shell(update: Update, context: CallbackContext):
     message = update.effective_message

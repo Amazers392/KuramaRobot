@@ -10,7 +10,7 @@ from telegram.utils.helpers import mention_html
 from alphabet_detector import AlphabetDetector
 
 import Kurama.modules.sql.locks_sql as sql
-from Kurama import dispatcher, DRAGONS, LOGGER
+from Kurama import dispatcher, SHINOBI, LOGGER
 from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.helper_funcs.chat_status import (
     can_delete,
@@ -157,7 +157,7 @@ def restr_members(bot,
                   other=False,
                   previews=False):
     for mem in members:
-        if mem.user in DRAGONS:
+        if mem.user in SHINOBI:
             pass
         try:
             bot.restrict_chat_member(

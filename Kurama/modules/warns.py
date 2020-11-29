@@ -3,7 +3,7 @@ import re
 from typing import Optional
 
 import telegram
-from Kurama import TIGERS, WOLVES, dispatcher
+from Kurama import TIGERS, BEASTS, dispatcher
 from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.helper_funcs.chat_status import (bot_admin,
                                                            can_restrict,
@@ -49,12 +49,12 @@ def warn(user: User,
             )
         return
 
-    if user.id in WOLVES:
+    if user.id in BEASTS:
         if warner:
             message.reply_text("Wolf disasters are warn immune.")
         else:
             message.reply_text(
-                "Wolf Disaster triggered an auto warn filter!\nI can't warn wolves but they should avoid abusing this."
+                "Wolf Disaster triggered an auto warn filter!\nI can't warn BEASTS but they should avoid abusing this."
             )
         return
 

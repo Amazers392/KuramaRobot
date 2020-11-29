@@ -3,7 +3,7 @@ from typing import Optional, List
 
 from telegram import Message, Chat, Update, User, ChatPermissions
 
-from Kurama import TIGERS, WOLVES, dispatcher
+from Kurama import TIGERS, BEASTS, dispatcher
 from Kurama.modules.helper_funcs.chat_status import (bot_admin,
                                                            is_user_admin,
                                                            user_admin,
@@ -29,7 +29,7 @@ def check_flood(update, context) -> str:
         return ""
 
     # ignore admins and whitelists
-    if (is_user_admin(chat, user.id) or user.id in WOLVES or user.id in TIGERS):
+    if (is_user_admin(chat, user.id) or user.id in BEASTS or user.id in TIGERS):
         sql.update_flood(chat.id, None)
         return ""
 

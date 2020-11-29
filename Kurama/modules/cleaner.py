@@ -4,7 +4,7 @@ from Kurama import ALLOW_EXCL, CustomCommandHandler, dispatcher
 from Kurama.modules.disable import DisableAbleCommandHandler
 from Kurama.modules.helper_funcs.chat_status import (bot_can_delete,
                                                            connection_status,
-                                                           dev_plus, user_admin)
+                                                           sage_plus, user_admin)
 from Kurama.modules.sql import cleaner_sql as sql
 from telegram import ParseMode, Update
 from telegram.ext import (CallbackContext, CommandHandler, Filters,
@@ -154,7 +154,7 @@ def add_bluetext_ignore_global(update: Update, context: CallbackContext):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
@@ -174,7 +174,7 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
 
 
 @run_async
-@dev_plus
+@sage_plus
 def bluetext_ignore_list(update: Update, context: CallbackContext):
 
     message = update.effective_message
